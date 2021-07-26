@@ -39,7 +39,10 @@ python generate_pt.py --filename ./demo/demo_pt/00010805.ply --gender female
 python generate_depth.py --filename ./demo/demo_depth/shortshort_flying_eagle.000075_depth.ply --gender male
 #### Input instruction
 The input point cloud or depth's head should correspond the Y-axis. The X-Z rotation is acceptable. 
-![Teaser Image](./assets/input_sample.PNG)<width="100" height="100">
+![Teaser Image](./assets/input_sample.PNG)
+<p align="center">
+  <img width="460" height="300" src="input_sample.PNG">
+</p>
 
 ## Citation
 If you find this project useful for your research, please consider citing:
