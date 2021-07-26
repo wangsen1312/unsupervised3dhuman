@@ -41,7 +41,7 @@ python generate_depth.py --filename ./demo/demo_depth/shortshort_flying_eagle.00
 The input point cloud or depth's head should correspond the Y-axis. The X-Z rotation is acceptable. 
 ![Teaser Image](./assets/input_sample.PNG)
 <p align="center">
-  <img width="460" height="300" src="input_sample.PNG">
+  <img width="460" height="300" src="./assets/input_sample.PNG">
 </p>
 
 ## Citation
