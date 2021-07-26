@@ -29,7 +29,7 @@ Download [SMPL Female and Male](https://smpl.is.tue.mpg.de/) and [SMPL Netural](
    ```   
 
 ## Download pre-trained models
-1. Download two weights (point cloud and depth) from: [point cloud](https://drive.google.com/file/d/17MpUwC4fMVoEF3VBzCX82NgLizxlZXEH/view?usp=sharing)  and [Depth](https://drive.google.com/file/d/1kbktLqVWEb-Hsbs-JxfcM7QP1mysOHvo/view?usp=sharing)
+1. Download two weights (point cloud and depth) from: [Point Cloud](https://drive.google.com/file/d/17MpUwC4fMVoEF3VBzCX82NgLizxlZXEH/view?usp=sharing)  and [Depth](https://drive.google.com/file/d/1kbktLqVWEb-Hsbs-JxfcM7QP1mysOHvo/view?usp=sharing)
 2. Put the downloaded weights in `<current directory>/pretrained/`
 
 ## Demo
