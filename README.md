@@ -35,8 +35,8 @@ Download [SMPL Female and Male](https://smpl.is.tue.mpg.de/) and [SMPL Netural](
 ## Demo
 ### Demo for whole point cloud
 python generate_pt.py --filename ./demo/demo_pt/00010805.ply --gender female
-### Demo for depth/partial point cloud
-python generate_depth.py --filename ./demo/demo_depth/shortshort_flying_eagle.000075_depth.ply --gender male
+### Demo for depth/partial point cloud (using Neutral model)
+python generate_depth.py --filename ./demo/demo_depth/shortshort_flying_eagle.000075_depth.ply
 #### Input instruction
 The input point cloud or depth's head should correspond the Y-axis. The X-Z rotation is acceptable. 
 <p align="center">
