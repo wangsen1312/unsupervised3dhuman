@@ -49,6 +49,7 @@ If you find this project useful for your research, please consider citing:
 @article{zuo2021unsupervised,
   title={Detailed human shape estimation from a single image by hierarchical mesh deformation},
   author={Zuo, Xinxin and Wang, Sen and Gong, Minglun and Cheng, Li},
+  journal={arXiv preprint arXiv:2107.07539},
   year={2021}
 }
 ```
