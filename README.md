@@ -38,7 +38,7 @@ python generate_pt.py --filename ./demo/demo_pt/00010805.ply --gender female
 ### Demo for partial point cloud/depth
 python generate_depth.py --filename ./demo/demo_depth/shortshort_flying_eagle.000075_depth.ply --gender male
 #### Input instruction
-![Teaser Image](https://drive.google.com/drive/u/0/folders/1K_ZyidUGOIrmVKpp8LXOQiIFtytsxvZk)
+![Teaser Image](./assets/input_sample.PNG)
 
 ## Citation
 If you find this project useful for your research, please consider citing:
