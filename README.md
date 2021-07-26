@@ -5,9 +5,6 @@
 [![report](https://img.shields.io/badge/arxiv-report-red)](https://arxiv.org/pdf/2107.07539)
 
 
-## Code
-Coming Soon!
-
 ## Prerequisites
 We have tested the code on Ubuntu 18.04/20.04 with CUDA 10.2
 
@@ -26,9 +23,9 @@ Download [SMPL Female and Male](https://smpl.is.tue.mpg.de/) and [SMPL Netural](
    ```
    smpl_models
     └-- smpl
-		    └-- SMPL_FEMALE.pkl
+    	└-- SMPL_FEMALE.pkl
         └-- SMPL_MALE.pkl
-		    └-- SMPL_NEUTRAL.pkl
+	└-- SMPL_NEUTRAL.pkl
    ```   
 
 ## Download pre-trained models
