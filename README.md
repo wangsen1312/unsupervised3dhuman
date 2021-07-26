@@ -25,7 +25,7 @@ Download [SMPL Female and Male](https://smpl.is.tue.mpg.de/) and [SMPL Netural](
     └-- smpl
     	└-- SMPL_FEMALE.pkl
 		└-- SMPL_MALE.pkl
-			└-- SMPL_NEUTRAL.pkl
+		└-- SMPL_NEUTRAL.pkl
    ```   
 
 ## Download pre-trained models
