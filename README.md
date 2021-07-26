@@ -34,9 +34,9 @@ Download [SMPL Female and Male](https://smpl.is.tue.mpg.de/) and [SMPL Netural](
 3. Put the downloaded weights in `<current directory>/pretrained/`
 
 ## Demo
-# Demo for whole point cloud
+### Demo for whole point cloud
 python generate_pt.py --filename ./demo/demo_pt/00010805.ply --gender female
-# Demo for partial point cloud/depth
+### Demo for partial point cloud/depth
 python generate_pt.py --filename ./demo/demo_depth/shortshort_flying_eagle.000075_depth.ply --gender male
 
 
