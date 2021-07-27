@@ -58,10 +58,9 @@ def body_fitting_loss_em(body_pose, preserve_pose, betas, preserve_betas, camera
     betas_preserve_loss = (betas_preserve_weight ** 2) * ((betas     - preserve_betas) ** 2).sum(dim=-1)
     pose_preserve_loss =  (pose_preserve_weight ** 2) *  ((body_pose - preserve_pose)  ** 2).sum(dim=-1)
     
-    #chamfer_loss =  0.0 #(chamfer_weight **2) * get_chamfer_loss(meshVerts,  modelVerts)[0] 
-    #+ ((chamfer_weight/10.0) **2 ) * get_chamfer_loss(meshVerts,  modelVerts)[1]
+    chamfer_loss =  (chamfer_weight **2) * get_chamfer_loss(meshVerts,  modelVerts)[0]  + ((chamfer_weight/4.0) **2 ) * get_chamfer_loss(meshVerts,  modelVerts)[1]
     
-    chamfer_loss =  (chamfer_weight **2) * chamfer_distance(meshVerts,  modelVerts)[0]
+    #chamfer_loss =  (chamfer_weight **2) * chamfer_distance(meshVerts,  modelVerts)[0]
     point2mesh_loss = (point2mesh_weight**2) * get_point2mesh_loss(meshVerts, smpl_output, 1, modelfaces)
     
 
