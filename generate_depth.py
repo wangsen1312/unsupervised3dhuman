@@ -34,8 +34,6 @@ parser.add_argument('--filename', type=str, default="./demo/demo_depth/shortshor
 opt = parser.parse_args()
 print(opt)
 
-
-
 # Load all Training settings
 if torch.cuda.is_available():
     device = torch.device("cuda:" + str(opt.gpu_ids))
