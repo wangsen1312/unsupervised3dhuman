@@ -124,18 +124,4 @@ param['pose'] = new_opt_pose.detach().cpu().numpy()
 param['trans'] = new_opt_cam_t.detach().cpu().numpy()
 joblib.dump(param, opt.dirs_save + filename_pure + "_EM.pkl", compress=3)
 
-
-#outputp = smplmodel(betas=pred_shape, global_orient=pred_R6D_3D, body_pose=pred_pose_body,
-#                    transl=pred_trans, return_verts=True)
-#mesh_p = trimesh.Trimesh(vertices=outputp.vertices.detach().cpu().numpy().squeeze(), faces=smplmodel.faces, process=False)
-#mesh_p.export(opt.dirs_save + filename_pure  + "_EM.ply")
-
-#param = {}
-#param['global6D'] = pred_R6D_3D.detach().cpu().numpy()
-#param['shape'] = pred_shape.detach().cpu().numpy()
-#param['pose'] = pred_pose.detach().cpu().numpy()
-#param['trans'] = pred_trans.detach().cpu().numpy()
-#param['trans_back'] = trans.detach().cpu().numpy()
-#joblib.dump(param, opt.dirs_save + filename_pure + "_EM.pkl", compress=3)
-
               
