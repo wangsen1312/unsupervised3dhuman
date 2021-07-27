@@ -6,7 +6,6 @@ import numpy as np
 from src.customloss import body_fitting_loss_em
 from src.prior import MaxMixturePrior
 
-
 #  surface EM
 class surface_EM_pt():
     """Implementation of SMPLify, use surface."""
@@ -19,7 +18,8 @@ class surface_EM_pt():
                  selected_index=np.arange(6890),
                  use_collision=False,
                  device=torch.device('cuda:0'),
-                 GMM_MODEL_DIR="./smpl_models/"
+                 GMM_MODEL_DIR="./smpl_models/",
+                 mu = 0.02
                  ):
 
         # Store options
@@ -40,9 +40,12 @@ class surface_EM_pt():
         # mesh intersection
         self.model_faces = smplxmodel.faces_tensor.view(-1)
         self.use_collision = use_collision
+        
+        # outlier prob
+        self.mu = mu
     
     @torch.no_grad()
-    def prob_cal(self, modelVerts_in, meshVerts_in, sigma=0.05**2):
+    def prob_cal(self, modelVerts_in, meshVerts_in, sigma=0.05**2, mu = 0.02):
         modelVerts_sq = torch.squeeze(modelVerts_in) 
         meshVerts_sq = torch.squeeze(meshVerts_in)
         
@@ -61,8 +64,7 @@ class surface_EM_pt():
         
         deltaVerts= delta_x * delta_x + delta_y * delta_y + delta_z * delta_z
         
-        sigmaInit = sigma
-        mu = 0.02 #1e-3 # 1e-4
+        sigmaInit = sigma #1e-3 # 1e-4
         d = 3.0 # three dimension
         mu_c = ((2.0 * torch.asin(torch.tensor(1.)) * sigmaInit)**(d/2.0) * mu * M)/((1-mu)*N)
         
@@ -136,7 +138,7 @@ class surface_EM_pt():
                 
                 modelVerts = smpl_output.vertices[:, self.selected_index]
                 # calculate the probInput
-                probInput, modelInd, meshInd = self.prob_cal(modelVerts, meshVerts, sigma=(0.15**2)*(self.num_iters-i+1)/self.num_iters) 
+                probInput, modelInd, meshInd = self.prob_cal(modelVerts, meshVerts, sigma=(0.15**2)*(self.num_iters-i+1)/self.num_iters, mu=self.mu) 
                 #sigma=(0.1**2)*(self.num_iters-i+1)/self.num_iters
 
                 loss =  body_fitting_loss_em(body_pose, preserve_pose, betas, preserve_betas, 
@@ -147,7 +149,7 @@ class surface_EM_pt():
                                              pose_prior_weight=4.78*2.0, #avoid some collisions
                                              pose_preserve_weight=0.0,
                                              correspond_weight=1500.0,
-                                             chamfer_weight=100.0,
+                                             chamfer_weight=200.0,
                                              point2mesh_weight=0.0,
                                              use_collision=self.use_collision, 
                                              model_vertices=smpl_output.vertices, model_faces=self.model_faces,
@@ -167,12 +169,7 @@ class surface_EM_pt():
                                     betas=betas,
                                     transl=camera_translation,
                                     return_full_pose=True)
-            #modelVerts = smpl_output.vertices
-            #probInput, modelInd, meshInd = prob_cal(modelVerts, meshVerts)
-            #final_loss = body_fitting_loss_em(body_pose, betas, preserve_betas, camera_translation,
-            #                                  modelVerts, meshVerts, modelInd, meshInd, probInput, 
-            #                                  self.pose_prior)
-                                                         
+ 
         vertices = smpl_output.vertices.detach()
         joints = smpl_output.joints.detach()
         pose = torch.cat([global_orient, body_pose], dim=-1).detach()
@@ -195,7 +192,8 @@ class surface_EM_depth():
                  selected_index=np.arange(6890),
                  use_collision=False,
                  device=torch.device('cuda:0'),
-                 GMM_MODEL_DIR="./smpl_models/"
+                 GMM_MODEL_DIR="./smpl_models/",
+                 mu=0.05
                  ):
 
         # Store options
@@ -216,11 +214,12 @@ class surface_EM_depth():
         # mesh intersection
         self.model_faces = smplxmodel.faces_tensor.view(-1)
         self.use_collision = use_collision
-        if self.use_collision:
-            self.part_segm_fn = config.Part_Seg_DIR
+        
+        # mu prob
+        self.mu = mu
     
     @torch.no_grad()
-    def prob_cal(self, modelVerts_in, meshVerts_in, sigma=0.05**2):
+    def prob_cal(self, modelVerts_in, meshVerts_in, sigma=0.05**2, mu = 0.02):
         modelVerts_sq = torch.squeeze(modelVerts_in) 
         meshVerts_sq = torch.squeeze(meshVerts_in)
         
@@ -240,7 +239,6 @@ class surface_EM_depth():
         deltaVerts= delta_x * delta_x + delta_y * delta_y + delta_z * delta_z
         
         sigmaInit = sigma
-        mu = 0.02 #1e-3 # 1e-4
         d = 3.0 # three dimension
         mu_c = ((2.0 * torch.asin(torch.tensor(1.)) * sigmaInit)**(d/2.0) * mu * M)/((1-mu)*N)
         
@@ -251,13 +249,7 @@ class surface_EM_depth():
         Ind = torch.where(probArray > 1e-6) #2e-7
         modelInd, meshInd = Ind[0], Ind[1]
         probInput = probArray[Ind]
-        
-        #print(deltaVerts.shape)
-        #print(probArray.shape)
-        
-        #P_sum  = torch.sum(probArray)
-        #P_sep = torch.sum(probArray * deltaVerts)
-        #sigma2 = P_sep/(P_sum*3)
+
                 
         return probInput, modelInd, meshInd
 
@@ -314,7 +306,7 @@ class surface_EM_depth():
                 
                 modelVerts = smpl_output.vertices[:, self.selected_index]
                 # calculate the probInput
-                probInput, modelInd, meshInd = self.prob_cal(modelVerts, meshVerts, sigma=(0.15**2)*(self.num_iters-i+1)/self.num_iters) 
+                probInput, modelInd, meshInd = self.prob_cal(modelVerts, meshVerts, sigma=(0.1**2)*(self.num_iters-i+1)/self.num_iters, mu=self.mu) 
                 #sigma=(0.1**2)*(self.num_iters-i+1)/self.num_iters
 
                 loss =  body_fitting_loss_em(body_pose, preserve_pose, betas, preserve_betas, 
@@ -322,11 +314,11 @@ class surface_EM_depth():
                                              modelVerts, meshVerts, modelInd, meshInd, probInput, 
                                              self.pose_prior,
                                              smpl_output, self.modelfaces, 
-                                             pose_prior_weight=4.78*5.0, #avoid some collisions
+                                             pose_prior_weight=4.78*3.0,
                                              pose_preserve_weight=5.0,
                                              correspond_weight=1000.0,
-                                             chamfer_weight=0.0,
-                                             point2mesh_weight=500.0,
+                                             chamfer_weight=100.0,
+                                             point2mesh_weight=200.0,
                                              shape_prior_weight=2.0, 
                                              use_collision=self.use_collision, 
                                              model_vertices=smpl_output.vertices, model_faces=self.model_faces,
@@ -346,11 +338,6 @@ class surface_EM_depth():
                                     betas=betas,
                                     transl=camera_translation,
                                     return_full_pose=True)
-            #modelVerts = smpl_output.vertices
-            #probInput, modelInd, meshInd = prob_cal(modelVerts, meshVerts)
-            #final_loss = body_fitting_loss_em(body_pose, betas, preserve_betas, camera_translation,
-            #                                  modelVerts, meshVerts, modelInd, meshInd, probInput, 
-            #                                  self.pose_prior)
                                                          
         vertices = smpl_output.vertices.detach()
         joints = smpl_output.joints.detach()
@@ -358,4 +345,3 @@ class surface_EM_depth():
         betas = betas.detach()
 
         return vertices, joints, pose, betas, camera_translation
-
