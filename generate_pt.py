@@ -69,7 +69,6 @@ pointcloudEM = surface_EM_pt(smplxmodel=smplmodel,
                           
 os.makedirs(opt.dirs_save, exist_ok=True)
 
-#file_name = "/hdd_data/xinxin/CAPE/cape_release/meshes/00215/longshort_chicken_wings/longshort_chicken_wings.000080.obj" 
 file_name = opt.filename
 filename_pure = os.path.splitext(os.path.basename(file_name))[0]
 print(filename_pure)
@@ -122,6 +121,4 @@ param['joints3d'] = joints3d.detach().cpu().numpy().squeeze()
 param['shape'] = new_opt_betas.detach().cpu().numpy()
 param['pose'] = new_opt_pose.detach().cpu().numpy()
 param['trans'] = new_opt_cam_t.detach().cpu().numpy()
-joblib.dump(param, opt.dirs_save + filename_pure + "_EM.pkl", compress=3)
-
-              
+joblib.dump(param, opt.dirs_save + filename_pure + "_EM.pkl", compress=3)  
