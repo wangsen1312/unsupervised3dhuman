@@ -40,8 +40,6 @@ class surface_EM_pt():
         # mesh intersection
         self.model_faces = smplxmodel.faces_tensor.view(-1)
         self.use_collision = use_collision
-        if self.use_collision:
-            self.part_segm_fn = config.Part_Seg_DIR
     
     @torch.no_grad()
     def prob_cal(self, modelVerts_in, meshVerts_in, sigma=0.05**2):
