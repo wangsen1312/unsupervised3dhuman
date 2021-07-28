@@ -47,7 +47,7 @@ The input point cloud or depth's head should correspond the Y-axis. The X-Z rota
 If you find this project useful for your research, please consider citing:
 ```
 @article{zuo2021unsupervised,
-  title={Detailed human shape estimation from a single image by hierarchical mesh deformation},
+  title={Unsupervised 3D Human Mesh Recovery from Noisy Point Clouds},
   author={Zuo, Xinxin and Wang, Sen and Gong, Minglun and Cheng, Li},
   journal={arXiv preprint arXiv:2107.07539},
   year={2021}
