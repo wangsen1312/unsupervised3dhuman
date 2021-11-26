@@ -1,6 +1,6 @@
-# Unsupervised 3D Human Mesh Recovery from Noisy Point Clouds
+# Self-supervised 3D Human Mesh Recovery from Noisy Point Clouds
 
-[Xinxin Zuo](https://sites.google.com/site/xinxinzuohome/), [Sen Wang](https://sites.google.com/site/senwang1312home/), [Minglun Gong](http://www.socs.uoguelph.ca/~minglun/), [Li Cheng](http://www.ece.ualberta.ca/~lcheng5/)
+[Xinxin Zuo](https://sites.google.com/site/xinxinzuohome/), [Sen Wang](https://sites.google.com/site/senwang1312home/), [Qiang Sun](https://sites.google.com/view/qsun)  [Minglun Gong](http://www.socs.uoguelph.ca/~minglun/), [Li Cheng](http://www.ece.ualberta.ca/~lcheng5/)
 
 [![report](https://img.shields.io/badge/arxiv-report-red)](https://arxiv.org/pdf/2107.07539)
 
@@ -46,9 +46,9 @@ The input point cloud or depth's head should correspond the Y-axis. The X-Z rota
 ## Citation
 If you find this project useful for your research, please consider citing:
 ```
-@article{zuo2021unsupervised,
-  title={Unsupervised 3D Human Mesh Recovery from Noisy Point Clouds},
-  author={Zuo, Xinxin and Wang, Sen and Gong, Minglun and Cheng, Li},
+@article{zuo2021selfsupervised,
+  title={Self-supervised 3D Human Mesh Recovery from Noisy Point Clouds},
+  author={Zuo, Xinxin and Wang, Sen and Sun, Qiang and Gong, Minglun and Cheng, Li},
   journal={arXiv preprint arXiv:2107.07539},
   year={2021}
 }
